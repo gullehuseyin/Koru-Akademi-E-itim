@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emlak Danışmanlığı Eğitim Sunumu</title>
+  <style>
+    :root {
+      --primary: #166534;
+      --primary-light: #22c55e;
+      --secondary: #f0fdf4;
+      --secondary-light: #dcfce7;
+      --text-dark: #1e293b;
+      --text-light: #f8fafc;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --info: #3b82f6;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: var(--secondary);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
+      background-color: var(--primary);
+      color: var(--text-light);
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+    
+    h1 {
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+    
+    h2 {
+      font-size: 24px;
+      color: var(--primary);
+      margin: 20px 0 15px;
+      padding-bottom: 5px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    
+    h3 {
+      font-size: 20px;
+      color: var(--primary);
+      margin: 15px 0 10px;
+    }
+    
+    p {
+      margin-bottom: 15px;
+    }
+    
+    ul, ol {
+      margin-left: 25px;
+      margin-bottom: 15px;
+    }
+    
+    li {
+      margin-bottom: 8px;
+    }
+    
+    .card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .alert {
+      padding: 15px;
+      border-radius: 5px;
+      margin: 15px 0;
+      border-left: 5px solid;
+    }
+    
+    .alert-info {
+      background-color: #e0f2fe;
+      border-color: var(--info);
+    }
+    
+    .alert-warning {
+      background-color: #fef3c7;
+      border-color: var(--warning);
+    }
+    
+    .alert-danger {
+      background-color: #fee2e2;
+      border-color: var(--danger);
+    }
+    
+    .alert-success {
+      background-color: var(--secondary-light);
+      border-color: var(--primary);
+    }
+    
+    .alert-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .tab-navigation {
+      display: flex;
+      margin-bottom: 20px;
+      overflow-x: auto;
+      background-color: white;
+      border-radius: 8px;
+      padding: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .tab {
+      padding: 10px 15px;
+      margin-right: 5px;
+      background-color: var(--secondary);
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: bold;
+      white-space: nowrap;
+      transition: background 0.3s;
+    }
+    
+    .tab:hover {
+      background-color: var(--secondary-light);
+    }
+    
+    .tab.active {
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    .footer {
+      background-color: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+    }
+    
+    .test-question {
+      background-color: var(--secondary-light);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    
+    .test-options {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .test-options li {
+      background-color: white;
+      padding: 10px 15px;
+      margin-bottom: 8px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .test-options li:hover {
+      background-color: var(--secondary);
+    }
+    
+    .test-options li.selected {
+      background-color: var(--primary-light);
+      color: white;
+      border-color: var(--primary);
+    }
+    
+    .button {
+      display: inline-block;
+      background-color: var(--primary);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+      border: none;
+      font-size: 16px;
+    }
+    
+    .button:hover {
+      background-color: var(--primary-light);
+    }
+    
+    .center-content {
+      text-align: center;
+      margin: 20px 0;
+    }
+    
+    /* İki sütunlu görünüm */
+    .two-columns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    
+    .two-columns > div {
+      flex: 1;
+      min-width: 250px;
+    }
+    
+    /* Renkli kutular */
+    .box {
+      padding: 15px;
+      border-radius: 5px;
+      margin: 15px 0;
+      background-color: var(--secondary-light);
+    }
+    
+    .box-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Emlak Danışmanlığı Eğitim Sunumu</h1>
+      <p>Profesyonel Emlak Danışmanlığı Becerileri</p>
+    </header>
+    
+    <div class="tab-navigation">
+      <a href="#portfoy" class="tab active">Portföy Yönetimi</a>
+      <a href="#ilan" class="tab">İlan Hazırlama</a>
+      <a href="#degerleme" class="tab">Değerleme Teknikleri</a>
+      <a href="#satis" class="tab">Satış Süreçleri</a>
+      <a href="#tapu" class="tab">Tapu İşlemleri</a>
+      <a href="#yatirim" class="tab">Yatırım Danışmanlığı</a>
+      <a href="#test" class="tab">Test</a>
+    </div>
+    
+    <!-- Portföy Yönetimi -->
+    <div id="portfoy" class="card">
+      <h2>Portföy Yönetimi</h2>
+      
+      <h3>Yetki Sözleşmeleri ve Aktif Portföyler</h3>
+      <p>
+        Portföy yönetiminde güncel yetki sözleşmelerinin takibi çok önemlidir. Yetki sözleşmesi, 
+        mülk sahibi ile emlak ofisi arasında imzalanan resmi belgedir. Süresi dolan yetki sözleşmeleri 
+        yenilenmeli veya portföyden çıkarılmalıdır.
+      </p>
+      
+      <div class="alert alert-success">
+        <div class="alert-title">Örnek:</div>
+        <p>1 Nisan 2021 tarihli, 1 yıllık Residence portföyü güncel değil iken, 10 Şubat 2024 tarihli, 2 yıllık İş Merkezi portföyü halen aktiftir.</p>
+      </div>
+      
+      <h3>Portföy Toplama Yöntemleri</h3>
+      <ul>
+        <li>İnternet ortamında sahibinden ilana çıkan portföyler</li>
+        <li>Yetki süresi biten portföyleri yenileme</li>
+        <li>FSBO (For Sale By Owner) aramaları</li>
+        <li>Sosyal medya platformları</li>
+        <li>İlgili alanda deneyimli personel çalıştırmak</li>
+        <li>Saha araştırması ve kapı kapı dolaşma</li>
+        <li>Davet ve etkinlikler düzenlemek</li>
+        <li>Mevcut portföyleri referans göstererek yenilerini edinmek</li>
+      </ul>
+      
+      <div class="alert alert-warning">
+        <div class="alert-title">İpucu:</div>
+        <p>Portföy toplama, süreklilik gerektiren ve sistematik yaklaşılması gereken bir süreçtir!</p>
+      </div>
+    </div>
+    
+    <!-- İlan Hazırlama -->
+    <div id="ilan" class="card" style="display: none;">
+      <h2>İlan Hazırlama ve Standartlar</h2>
+      
+      <h3>Doğru ve Eksiksiz İlan Hazırlama</h3>
+      <p>Kaliteli bir ilan için dikkat edilmesi gereken unsurlar:</p>
+      
+      <div class="two-columns">
+        <div>
+          <ul>
+            <li>İlan numarası</li>
+            <li>Güncel tarih</li>
+            <li>İlan durumu (satılık/kiralık)</li>
+            <li>Konut tipi</li>
+            <li>Konut şekli</li>
+            <li>Oda + salon sayısı</li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li>Brüt/net m²</li>
+            <li>Bulunduğu kat</li>
+            <li>Bina yaşı</li>
+            <li>Isınma tipi</li>
+            <li>Kat sayısı</li>
+            <li>Kaliteli fotoğraflar</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="alert alert-danger">
+        <div class="alert-title">Kritik Not:</div>
+        <p>Eksik bilgilerle hazırlanan ilanlar müşteri güvenini sarsar ve zaman kaybına neden olur.</p>
+      </div>
+      
+      <div class="alert alert-info">
+        <div class="alert-title">Eğlenceli Not:</div>
+        <p>"Bir emlakçının eksik bilgi girdiği ilan, sahipsiz bir gölde kürek çekmek gibidir - çok çaba harcarsınız ama bir yere varamazsınız!"</p>
+      </div>
+    </div>
+    
+    <!-- Değerleme Teknikleri -->
+    <div id="degerleme" class="card" style="display: none;">
+      <h2>Değerleme Teknikleri</h2>
+      
+      <h3>Rayiç Değer Tespiti</h3>
+      <p>Doğru fiyatlandırma için kullanılan yöntemler:</p>
+      <ul>
+        <li>Aynı bölgedeki benzer özellikteki gayrimenkullerin satış fiyatlarını karşılaştırma</li>
+        <li>Satış görmüş değer üzerinden metrekare birim fiyatı hesaplama</li>
+        <li>Belediyenin belirlediği rayiç bedelleri inceleme</li>
+        <li>Emlak danışmanı olarak piyasa deneyiminizi kullanma</li>
+      </ul>
+      
+      <div class="box">
+        <div class="box-title">Örnek Hesaplama:</div>
+        <ul>
+          <li>Belediyenin Metre Kare Rayiç Bedeli: 10.000 TL</li>
+          <li>Satış Görmüş Metre Kare Bedeli: 20.000 TL</li>
+          <li>Emlak Danışmanının Belirlediği Nihai Bedel: 23.000 TL</li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Satış Süreçleri -->
+    <div id="satis" class="card" style="display: none;">
+      <h2>Satış ve Kiralama Süreçleri</h2>
+      
+      <h3>Pazarlık ve Müşteri İlişkileri</h3>
+      <ul>
+        <li>Fiyatı 10 milyon TL olan gayrimenkule 9 milyon TL teklif gelmesi durumunda, teklifi mülk sahibine iletip nihai durumu müşteriye bildirin</li>
+        <li>Metrekare fiyatı belirlenen bir gayrimenkulün toplam satış fiyatını doğru hesaplayın (10.000 TL/m² × 300 m² = 3.000.000 TL)</li>
+        <li>Alıcı ve satıcıyı bir araya getirmek için uygun bir ortam oluşturun</li>
+      </ul>
+      
+      <h3>Kiralama Öncesi Hazırlıklar</h3>
+      <ul>
+        <li>Temizlik işlemleri</li>
+        <li>Tadilatların tamamlanması</li>
+        <li>Abonelik devirleri</li>
+        <li>Emlak vergisi borçlarının kontrolü</li>
+        <li>Demirbaş durumu</li>
+        <li>Fotoğrafların sisteme yüklenmesi</li>
+      </ul>
+      
+      <div class="alert alert-warning">
+        <div class="alert-title">İpucu:</div>
+        <p>Kira sözleşmesinde boş bırakılan her bilgi eksik ve hatalıdır!</p>
+      </div>
+    </div>
+    
+    <!-- Tapu İşlemleri -->
+    <div id="tapu" class="card" style="display: none;">
+      <h2>Tapu İşlemleri</h2>
+      
+      <h3>Satış İçin Gerekli Evraklar</h3>
+      <ul>
+        <li>Kimlik belgeleri</li>
+        <li>Tapu senedi</li>
+        <li>Emlak beyan değeri</li>
+        <li>Zorunlu Deprem Sigortası (DASK)</li>
+        <li>Enerji Kimlik Belgesi</li>
+        <li>Tapu harcı makbuzları</li>
+      </ul>
+      
+      <h3>Tapu Satış Süreci</h3>
+      <ol>
+        <li>Satıcı tapu başvurusu yapar</li>
+        <li>SMS ile başvuru numarası gelir</li>
+        <li>İkinci SMS'te döner sermaye harç bilgileri ve randevu saati bilgileri alınır</li>
+        <li>Alıcı ve satıcı kendi paylarına düşen döner sermayeyi ve harçları yatırır</li>
+        <li>Para ödemesi gerçekleşir</li>
+        <li>Randevu saatinde imzaya gidilir</li>
+        <li>Gerekli belgeler imzalanır</li>
+        <li>Tapu memuru yeni tapuyu getirir ve işlem tamamlanır</li>
+      </ol>
+      
+      <h3>İpotekli Satış</h3>
+      <ul>
+        <li>WEB tapu üzerinden, bankadan alınan ipotek evrakları sisteme yüklenir</li>
+        <li>Kredi tutarı satıştan sonra ilgili banka tarafından satıcının hesabına yatırılır</li>
+      </ul>
+    </div>
+    
+    <!-- Yatırım Danışmanlığı -->
+    <div id="yatirim" class="card" style="display: none;">
+      <h2>Yatırım Danışmanlığı</h2>
+      
+      <h3>Yatırımcı Yönlendirme</h3>
+      <p>Yatırım yapmak isteyen müşteriler için:</p>
+      <ul>
+        <li>Toplam bütçesini öğrenin</li>
+        <li>Yatırım amacını belirleyin</li>
+        <li>Bütçesine uygun yatırımlık yerleri önerin</li>
+        <li>Beklenen amortisman süresini hesaplayın</li>
+      </ul>
+      
+      <h3>Yatırım Önerileri</h3>
+      <p>Metrekaresi en büyük olup yıllık kira getirisi en yüksek olan gayrimenkuller tercih edilmelidir:</p>
+      <div class="box">
+        <div class="box-title">Örneğin:</div>
+        <ul>
+          <li>500 metrekare düz ayak dükkanın yıllık kira getirisi 170.000 TL</li>
+          <li>450 metrekare düz ayak dükkanın yıllık kira getirisi 170.000 TL</li>
+          <li>400 metrekare düz ayak dükkanın yıllık kira getirisi 160.000 TL</li>
+          <li>300 metrekare düz ayak dükkanın yıllık kira getirisi 150.000 TL</li>
+        </ul>
+      </div>
+      
+      <h3>Komisyon Oranları</h3>
+      <p>Emlak sektöründe resmi komisyon oranları: Alıcıdan %2+KDV, Satıcıdan %2+KDV (KDV oranı %20)</p>
+    </div>
+    
+    <!-- Test -->
+    <div id="test" class="card" style="display: none;">
+      <h2>Test ve Değerlendirme</h2>
+      <p>Bilgilerinizi test etmek için aşağıdaki soruları cevaplayın:</p>
+      
+      <div class="test-question">
+        <h3>1. Mülk sahibi ile emlak ofisi arasında imzalanan belge hangisidir?</h3>
+        <ul class="test-options">
+          <li>A) Satış sözleşmesi</li>
+          <li>B) Yetki sözleşmesi</li>
+          <li>C) Kira kontratı</li>
+          <li>D) Tapu senedi</li>
+        </ul>
+      </div>
+      
+      <div class="test-question">
+        <h3>2. Emlak sektöründe alıcıdan alınan yasal komisyon oranı nedir?</h3>
+        <ul class="test-options">
+          <li>A) %1+KDV</li>
+          <li>B) %2+KDV</li>
+          <li>C) %3+KDV</li>
+          <li>D) %4+KDV</li>
+        </ul>
+      </div>
+      
+      <div class="test-question">
+        <h3>3. Hangi evrak gayrimenkul satışında zorunlu değildir?</h3>
+        <ul class="test-options">
+          <li>A) Kimlik belgesi</li>
+          <li>B) DASK</li>
+          <li>C) Enerji Kimlik Belgesi</li>
+          <li>D) İskan belgesi</li>
+        </ul>
+      </div>
+      
+      <div class="test-question">
+        <h3>4. Rayiç değer tespitinde aşağıdakilerden hangisi kullanılmaz?</h3>
+        <ul class="test-options">
+          <li>A) Aynı bölgedeki benzer özellikteki gayrimenkullerin satış fiyatları</li>
+          <li>B) Belediyenin belirlediği rayiç bedeller</li>
+          <li>C) Döviz kurları</li>
+          <li>D) Satış görmüş değer üzerinden metrekare birim fiyatı</li>
+        </ul>
+      </div>
+      
+      <div class="test-question">
+        <h3>5. İnşaat halinde bulunan konutların satılması için hangi yöntem uygundur?</h3>
+        <ul class="test-options">
+          <li>A) Kira ile satış</li>
+          <li>B) Maket üzerinden satış</li>
+          <li>C) İnternetten fotoğraf gösterimi</li>
+          <li>D) Binanın bitimini bekleme</li>
+        </ul>
+      </div>
+      
+      <div class="center-content">
+        <button class="button" onclick="showResult()">Testi Tamamla</button>
+      </div>
+      
+      <div id="test-result" class="center-content" style="display: none;">
+        <div style="width: 120px; height: 120px; border-radius: 60px; background-color: #dcfce7; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;">
+          <span style="font-size: 36px; font-weight: bold; color: #166534;">80%</span>
+        </div>
+        <h3 style="color: #166534; margin-bottom: 15px;">Tebrikler! Testi Geçtiniz!</h3>
+        <p>8/10 doğru cevap verdiniz.</p>
+        
+        <div style="background-color: #f0fdf4; padding: 15px; border-radius: 8px; margin: 20px 0; display: inline-block;">
+          <p>Başarı için minimum puan: <strong>70</strong></p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <h3>Emlak Akademi</h3>
+      <p>Koru Belge Emlak Danışmanlığı Eğitimleri</p>
+      <p>© 2025 Tüm Hakları Saklıdır</p>
+    </div>
+  </div>
+
+  <script>
+    // Basit tab değiştirme işlevi
+    document.addEventListener('DOMContentLoaded', function() {
+      const tabs = document.querySelectorAll('.tab');
+      const cards = document.querySelectorAll('.card');
+      
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // Tüm tabları ve kartları deaktif et
+          tabs.forEach(t => t.classList.remove('active'));
+          cards.forEach(c => c.style.display = 'none');
+          
+          // Seçilen tabı ve kartı aktif et
+          this.classList.add('active');
+          const targetId = this.getAttribute('href').substring(1);
+          document.getElementById(targetId).style.display = 'block';
+        });
+      });
+      
+      // Test seçeneklerine tıklama işlevi
+      const options = document.querySelectorAll('.test-options li');
+      options.forEach(option => {
+        option.addEventListener('click', function() {
+          // Aynı soru içerisindeki tüm seçenekleri temizle
+          const questionOptions = this.parentElement.querySelectorAll('li');
+          questionOptions.forEach(o => o.classList.remove('selected'));
+          
+          // Seçilen seçeneği işaretle
+          this.classList.add('selected');
+        });
+      });
+    });
+    
+    // Test sonucunu göster
+    function showResult() {
+      document.getElementById('test-result').style.display = 'block';
+      
+      // Sayfayı sonuca kaydır
+      document.getElementById('test-result').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
